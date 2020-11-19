@@ -10,6 +10,7 @@ plugins {
 	id 'checkstyle'
     // Apply the java-library plugin to add support for Java Library
     id 'java-library-distribution'
+	id 'eclipse'
 }
 
 group 'TrustNewsBooker'
