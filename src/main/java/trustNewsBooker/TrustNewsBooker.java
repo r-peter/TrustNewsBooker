@@ -12,6 +12,7 @@ import com.owlike.genson.Genson;
 
 @Contract(name = "TrustNewsBooker", info = @Info(title = "TrustNewsBooker contract", description = "TrustNewsBooker chaincode", version = "0.0.1-SNAPSHOT"))
 
+@Default
 public final class TrustNewsBooker implements ContractInterface {
 
 	private final Genson genson = new Genson();
