@@ -1,9 +1,9 @@
-export TEST_NETWORK_PATH=/home/group_10/hyperledger-fabric/fabric-samples/test-network
+export TEST_NETWORK_PATH="/home/group_10/hyperledger-fabric/fabric-samples/test-network"
 
 CHANNEL_NAME="samplechannel"
 CHAINCODE_NAME="TrustNewsBooker"
 CHAINCODE_VERSION="1"
-CHAINCODE_PATH="home/group_10/hyperledger-fabric/fabric-samples/chaincode/TrustNewsBooker/build/install/trustNewsBooker"
+CHAINCODE_PATH="/home/group_10/hyperledger-fabric/fabric-samples/chaincode/TrustNewsBooker/build/install/trustNewsBooker"
 CHAINCODE_LANG="java"
 CHAINCODE_LABEL="trustNewsBooker_1"
 
