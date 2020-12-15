@@ -1,4 +1,9 @@
-export TEST_NETWORK_PATH="/home/group_10/hyperledger-fabric/fabric-samples/test-network"
+##############################################NOTE#######################################
+#This script is based on the udemy course available at: 
+#https://www.udemy.com/course/learn-hyperledger-fabric-chaincode-development-using-java/
+#########################################################################################
+
+export TEST_NETWORK_PATH="/home/group_10/hyperledger-fabric/fabric-samples/another-network"
 
 CHANNEL_NAME="samplechannel"
 CHAINCODE_NAME="TrustNewsBooker"
@@ -12,7 +17,7 @@ setEnvVars() {
 	export FABRIC_CFG_PATH=${PWD}/../config/
 	export CORE_PEER_TLS_ENABLED=true
 	export ORDERER_CA=${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
-	export ORDERER_ADDRESS=localhost:7050
+	export ORDERER_ADDRESS=192.168.133.108:7050
 	export CORE_PEER_TLS_ROOTCERT_FILE_ORG1=${PWD}/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt
 	export CORE_PEER_TLS_ROOTCERT_FILE_ORG2=${PWD}/organizations/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt
 }
@@ -21,14 +26,14 @@ setEnvVarsForPeer0Org1() {
     export CORE_PEER_LOCALMSPID="Org1MSP"
     export CORE_PEER_TLS_ROOTCERT_FILE=${CORE_PEER_TLS_ROOTCERT_FILE_ORG1}
     export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp
-    export CORE_PEER_ADDRESS=localhost:7051
+    export CORE_PEER_ADDRESS=192.168.133.108:7051
 }
 
 setEnvVarsForPeer0Org2() {
     export CORE_PEER_LOCALMSPID="Org2MSP"
     export CORE_PEER_TLS_ROOTCERT_FILE=$CORE_PEER_TLS_ROOTCERT_FILE_ORG2
     export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp
-    export CORE_PEER_ADDRESS=localhost:9051
+    export CORE_PEER_ADDRESS=192.168.133.108:9051
 
 }
 
@@ -109,8 +114,8 @@ commitChaincodeDefination() {
     peer lifecycle chaincode commit -o $ORDERER_ADDRESS\
     --ordererTLSHostnameOverride orderer.example.com --tls $CORE_PEER_TLS_ENABLED\
     --cafile $ORDERER_CA --channelID ${CHANNEL_NAME} --name ${CHAINCODE_NAME}\
-    --peerAddresses localhost:7051 --tlsRootCertFiles $CORE_PEER_TLS_ROOTCERT_FILE_ORG1\
-    --peerAddresses localhost:9051 --tlsRootCertFiles $CORE_PEER_TLS_ROOTCERT_FILE_ORG2\
+    --peerAddresses 192.168.133.108:7051 --tlsRootCertFiles $CORE_PEER_TLS_ROOTCERT_FILE_ORG1\
+    --peerAddresses 192.168.133.108:9051 --tlsRootCertFiles $CORE_PEER_TLS_ROOTCERT_FILE_ORG2\
     --version ${CHAINCODE_VERSION} --sequence 1 --init-required
     echo "===================== Chaincode definition committed on channel ===================== "
 }
@@ -129,8 +134,8 @@ chaincodeInvokeInit() {
     peer chaincode invoke -o $ORDERER_ADDRESS\
     --ordererTLSHostnameOverride orderer.example.com --tls $CORE_PEER_TLS_ENABLED\
     --cafile $ORDERER_CA -C ${CHANNEL_NAME} --name ${CHAINCODE_NAME}\
-    --peerAddresses localhost:7051 --tlsRootCertFiles $CORE_PEER_TLS_ROOTCERT_FILE_ORG1\
-    --peerAddresses localhost:9051 --tlsRootCertFiles $CORE_PEER_TLS_ROOTCERT_FILE_ORG2\
+    --peerAddresses 192.168.133.108:7051 --tlsRootCertFiles $CORE_PEER_TLS_ROOTCERT_FILE_ORG1\
+    --peerAddresses 192.168.133.108:9051 --tlsRootCertFiles $CORE_PEER_TLS_ROOTCERT_FILE_ORG2\
     --isInit -c '{"Args":[]}'
     echo "===================== Succesfully Initilized the chaincode===================== "
 }
@@ -141,8 +146,8 @@ chaincodeAddTrustNews() {
     peer chaincode invoke -o $ORDERER_ADDRESS\
     --ordererTLSHostnameOverride orderer.example.com --tls $CORE_PEER_TLS_ENABLED\
     --cafile $ORDERER_CA -C ${CHANNEL_NAME} --name ${CHAINCODE_NAME}\
-    --peerAddresses localhost:7051 --tlsRootCertFiles $CORE_PEER_TLS_ROOTCERT_FILE_ORG1\
-    --peerAddresses localhost:9051 --tlsRootCertFiles $CORE_PEER_TLS_ROOTCERT_FILE_ORG2\
+    --peerAddresses 192.168.133.108:7051 --tlsRootCertFiles $CORE_PEER_TLS_ROOTCERT_FILE_ORG1\
+    --peerAddresses 192.168.133.108:9051 --tlsRootCertFiles $CORE_PEER_TLS_ROOTCERT_FILE_ORG2\
     -c '{"Args":["addTrustNews","1","SecondTrustNews","Client"]}'
     echo "===================== Successfully Added New Trust News===================== "
 }
@@ -153,8 +158,8 @@ chaincodeQueryTrustNewsById() {
     peer chaincode invoke -o $ORDERER_ADDRESS\
     --ordererTLSHostnameOverride orderer.example.com --tls $CORE_PEER_TLS_ENABLED\
     --cafile $ORDERER_CA -C ${CHANNEL_NAME} --name ${CHAINCODE_NAME}\
-    --peerAddresses localhost:7051 --tlsRootCertFiles $CORE_PEER_TLS_ROOTCERT_FILE_ORG1\
-    --peerAddresses localhost:9051 --tlsRootCertFiles $CORE_PEER_TLS_ROOTCERT_FILE_ORG2\
+    --peerAddresses 192.168.133.108:7051 --tlsRootCertFiles $CORE_PEER_TLS_ROOTCERT_FILE_ORG1\
+    --peerAddresses 192.168.133.108:9051 --tlsRootCertFiles $CORE_PEER_TLS_ROOTCERT_FILE_ORG2\
     -c '{"Args":["queryTrustNewsById","1"]}'
     echo "===================== Successfully Invoked Query Trust News By Id Chaincode Function===================== "
 }
@@ -165,8 +170,8 @@ chaincodeChangeTrustNews() {
     peer chaincode invoke -o $ORDERER_ADDRESS\
     --ordererTLSHostnameOverride orderer.example.com --tls $CORE_PEER_TLS_ENABLED\
     --cafile $ORDERER_CA -C ${CHANNEL_NAME} --name ${CHAINCODE_NAME}\
-    --peerAddresses localhost:7051 --tlsRootCertFiles $CORE_PEER_TLS_ROOTCERT_FILE_ORG1\
-    --peerAddresses localhost:9051 --tlsRootCertFiles $CORE_PEER_TLS_ROOTCERT_FILE_ORG2\
+    --peerAddresses 192.168.133.108:7051 --tlsRootCertFiles $CORE_PEER_TLS_ROOTCERT_FILE_ORG1\
+    --peerAddresses 192.168.133.108:9051 --tlsRootCertFiles $CORE_PEER_TLS_ROOTCERT_FILE_ORG2\
     -c '{"Args":["changeTrustNews", "1","Signature1"]}'
     echo "===================== Successfully Change Trust News Chaincode Function===================== "
 }
