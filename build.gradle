@@ -6,6 +6,13 @@
  * User Manual available at https://docs.gradle.org/6.3/userguide/java_library_plugin.html
  */
 
+/*
+
+NOTE: This file is based on the udemy course available at: 
+https://www.udemy.com/course/learn-hyperledger-fabric-chaincode-development-using-java/
+*/
+
+
 plugins {
 	id 'checkstyle'
     // Apply the java-library plugin to add support for Java Library
